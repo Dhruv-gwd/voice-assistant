@@ -3,24 +3,23 @@ import pyttsx3
 import subprocess
 import os
 
-# -----------------------------
-#  TEXT TO SPEECH ENGINE
-# -----------------------------
+#  TEXT TO SPEECH
+
 engine = pyttsx3.init()
 
 def speak(text):
     engine.say(text)
     engine.runAndWait()
 
-# -----------------------------
-#  SPEECH RECOGNIZER
-# -----------------------------
-recognizer = sr.Recognizer()
-current_language = "en-IN"   # English only
 
-# -----------------------------
+#  SPEECH RECOGNIZER
+
+recognizer = sr.Recognizer()
+current_language = "en-IN"    #English only
+
+
 #  OPEN APPLICATION FUNCTIONS
-# -----------------------------
+
 def open_steam(path):
     try:
         subprocess.Popen([path])
@@ -37,9 +36,9 @@ def open_calculator():
     subprocess.Popen(["calc.exe"])
     speak("Opening Calculator.")
 
-# -----------------------------
+
 #  LISTEN FUNCTION
-# -----------------------------
+
 def listen():
     with sr.Microphone() as source:
         print("Listening...")
@@ -59,12 +58,13 @@ def listen():
         speak("Network error.")
         return ""
 
-# -----------------------------
+
 #  COMMAND HANDLER
-# -----------------------------
+
 def process_command(command):
 
     # Open apps
+    
     if "open steam" in command or "start steam" in command:
         open_steam(r"C:\Program Files (x86)\Steam\steam.exe")
         return
@@ -78,15 +78,16 @@ def process_command(command):
         return
 
     # Stop / Exit bot
+    
     if "stop" in command or "exit" in command or "bye" in command:
         speak("Goodbye!")
         exit()
 
     speak("I don't know this command.")
 
-# -----------------------------
+
 #  START ASSISTANT
-# -----------------------------
+
 speak("Hello, I am your assistant. How can I help you?")
 
 while True:
